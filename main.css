@@ -1,0 +1,177 @@
+@import url(webfonts/stylesheet.css);
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Libre Baskerville', serif;
+  /* font: normal 16px 'Noto Sans Thai UI', 'Noto Sans', sans-serif; */
+  color: white;
+  /* overflow-x: hidden; */
+  /* padding-bottom: 50px; */
+  background-color: black;
+}
+
+h1 {
+  font-size: 18px;
+  line-height: 16px;
+}
+
+h2 {
+  font-size: 16px;
+  font-weight: 300;
+}
+
+h3 {
+  font-size: 12px;
+  font-weight: bold;
+}
+
+h4 {
+  font-size: 10px;
+  font-weight: 300;
+}
+
+.highlight {
+  color: #F0324B;
+}
+
+.centered {
+  text-align: center;
+}
+
+.right-aligned {
+  text-align: right;
+}
+
+.top-space {
+  margin-top: 1.5em;
+}
+
+.fixed {
+  position: fixed;
+  left: 50%;
+  /* width: 50px; */
+}
+
+a:link,
+a:visited,
+a:active {
+  color: #F0324B;
+  text-decoration: none;
+}
+
+a:hover {
+  color: #F0324B;
+  text-decoration: underline;
+}
+
+#intro {
+  width: 320px;
+  margin: 20px auto;
+}
+
+#calendar {
+  width: 320px;
+  margin: 20px auto;
+  color: white;
+  background-color: black;
+}
+
+.wrapper {
+  background-color: #fff;
+  color: #444;
+}
+
+.header {
+  grid-area: header;
+}
+
+.sidebar {
+  grid-area: sidebar;
+}
+
+.date {
+  grid-area: content;
+}
+
+.footer {
+  grid-area: footer;
+}
+
+.wrapper {
+  width: display: grid;
+  grid-template-columns: repeat(9, 1fr);
+  grid-template-rows: repeat(6, 1fr);
+  grid-template-areas: "sidebar header header header header header header header sidebar" "sidebar date date date date date date date sidebar" "sidebar footer footer footer footer footer footer footer sidebar";
+}
+
+#conclusion {
+  width: 320px;
+  margin: 0 auto;
+  background: black;
+  /* z-index: 1; */
+  display: flex;
+  flex-direction: column;
+}
+
+
+/* .share-buttons {
+margin-top: auto;
+margin-bottom: 20px;
+text-align: center;
+} */
+
+.sharebox {
+  margin-top: auto;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.download {
+  text-align: center;
+}
+
+
+/* GENERAL MEDIA QUERIES */
+
+
+/* @media only screen and (max-width: 900px) {
+.title, .text, .status {
+  width: 100%;
+}
+.image-wrapper {
+  width: 100%;
+  position: unset;
+}
+}
+@media only screen and (max-width: 600px) {
+.fixed {
+  text-align: left;
+}
+.bottom {
+  text-align: left;
+}
+
+.intro .container {
+  text-align: right;
+  padding-right: 40px;
+}
+
+.timeline ul::before, .timeline ul::after {
+  left: 20px;
+}
+.timeline ul li {
+  margin-left: 50px;
+}
+.timeline ul li::before, .timeline ul li.last::before {
+  content: '';
+}
+.timeline ul li > div {
+  width: calc(100vw - 120px);
+}
+} */
