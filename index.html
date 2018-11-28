@@ -1,4 +1,5 @@
 <html>
+
 <head>
   <meta content="width=device-width, height=device-height, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
   <meta charset="utf-8" />
@@ -23,10 +24,12 @@
   <meta name="twitter:image" content="https://elect.in.th/democracy-calendar/images/thumbnail.png" />
 
   <title>2019 Democracy Calendar - ELECT.IN.TH</title>
-  <link href="//fonts.googleapis.com/css?family=Libre+Baskerville|Noto+Sans" rel="stylesheet">
+  <link href="//fonts.googleapis.com/css?family=Libre+Baskerville|Noto+Sans|Rubik" rel="stylesheet">
 
-  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU"
+    crossorigin="anonymous">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+    crossorigin="anonymous">
   <link rel="stylesheet" href="header.css">
   <link rel="stylesheet" href="sharer.css">
 
@@ -36,7 +39,7 @@
   <script async src="https://www.googletagmanager.com/gtag/js?id=UA-129270906-1"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
+    function gtag() { dataLayer.push(arguments); }
     gtag('js', new Date());
 
     gtag('config', 'UA-129270906-1');
@@ -92,9 +95,21 @@
   </header>
 
   <section id="intro">
-    <h1>2019</h1>
-    <h1>DEMOCRACY</h1>
-    <h1>Calendar</h1>
+    <div id="title">
+      <h1>2019</h1>
+      <h1>DEMOCRACY</h1>
+      <h1>Calendar</h1>
+    </div>
+    <svg id="legend"></svg>
+    <div id="days-of-week">
+      <div class="day">Sun</div>
+      <div class="day">Mon</div>
+      <div class="day">Tue</div>
+      <div class="day">Wed</div>
+      <div class="day">Thu</div>
+      <div class="day">Fri</div>
+      <div class="day">Sat</div>
+    </div>
   </section>
 
   <section id="calendar">
@@ -115,12 +130,14 @@
     </div> -->
   </section>
 
-<!-- <script async defer src="//platform.instagram.com/en_US/embeds.js"></script> -->
-<!-- <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script> -->
-<script src="//d3js.org/d3.v4.min.js"></script>
-<!-- <script src="//cdn.jsdelivr.net/npm/lodash@4.17.10/lodash.min.js"></script> -->
-<script src="main.js"></script>
-<script src="sharer.js"></script>
+  <!-- <script async defer src="//platform.instagram.com/en_US/embeds.js"></script> -->
+  <!-- <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script> -->
+  <script src="//d3js.org/d3.v4.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/d3-legend/2.25.6/d3-legend.min.js"></script>
+  <!-- <script src="//cdn.jsdelivr.net/npm/lodash@4.17.10/lodash.min.js"></script> -->
+  <script src="main.js"></script>
+  <script src="sharer.js"></script>
 
 </body>
+
 </html>
