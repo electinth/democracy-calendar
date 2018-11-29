@@ -14,7 +14,23 @@ for (let day = 0; day < first_day_of_year; day++) {
 }
 
 d3.csv('events.csv', function (data) {
-  // console.log(data);
+  let events_by_date = {};
+  data
+    .filter(d => d.color)
+    .forEach(d => {
+      if (events_by_date[d.date_month]) {
+        events_by_date[d.date_month].texts.push(d.event);
+        events_by_date[d.date_month].colors.push(+d.color);
+        events_by_date[d.date_month].years.push(+d.year);
+      } else {
+        events_by_date[d.date_month] = {
+          texts: [d.event],
+          colors: [+d.color],
+          years: [+d.year]
+        }
+      }
+    });
+  console.log(events_by_date);
 
   for (let day = 0; day < 365; day++) {
     let new_date = new Date(date.getTime() + (day * 24 * 60 * 60 * 1000));
@@ -36,9 +52,11 @@ d3.csv('events.csv', function (data) {
       });
     }
 
+    let event = events_by_date[current_date + '-' + current_month.substring(0, 3)];
     dates.push({
       date: current_date,
-      events: [0, 1],
+      colors: event ? event.colors.map(c => event_colors[c]) : ['#4A4A4A'], //neutral color unless there's an event
+      texts: [],
       dummy: false
     });
   }
@@ -48,7 +66,15 @@ d3.csv('events.csv', function (data) {
     .enter()
     .append('div')
     .attr('class', d => d.dummy ? (d.month ? 'month' : 'date-dummy') : 'date')
-    .style('background-image', d => d.dummy ? 'unset' : `linear-gradient(45deg, ${event_colors[d.events[0]]} 0%, ${event_colors[d.events[0]]} 50%, ${event_colors[d.events[1]]} 50%, ${event_colors[d.events[1]]} 100%`)
+    .style('background-image', d => {
+      if (d.dummy) {
+        return 'unset';
+      } else {
+        let color0 = d.colors[0];
+        let color1 = d.colors[(d.colors.length > 1) ? 1 : 0];
+        return `linear-gradient(45deg, ${color0} 0%, ${color0} 50%, ${color1} 50%, ${color1} 100%`;
+      }
+    })
     .text(d => d.date);
 });
 
