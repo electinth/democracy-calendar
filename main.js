@@ -5,6 +5,7 @@ const event_color_scale = d3.scaleOrdinal()
 
 let date = new Date('Janurary 1, 2019');
 let dates = [];
+const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
 
 const calendar = d3.select('#calendar');
 const first_day_of_year = 2;
@@ -16,16 +17,23 @@ d3.csv('events.csv', function (data) {
   // console.log(data);
 
   for (let day = 0; day < 365; day++) {
-    let current_date = (new Date(date.getTime() + (day * 24 * 60 * 60 * 1000))).getDate();
+    let new_date = new Date(date.getTime() + (day * 24 * 60 * 60 * 1000));
+    let current_date = new_date.getDate();
+    let current_month = months[new_date.getMonth()];
 
     if (current_date === 1) {
       for (let day = 0; day < 14; day++) {
         dates.push({
           date: '',
-          events: [0, 1],
-          dummy: true
+          dummy: true,
+          month: false
         });
       }
+      dates.push({
+        date: current_month,
+        dummy: true,
+        month: true
+      });
     }
 
     dates.push({
@@ -39,21 +47,21 @@ d3.csv('events.csv', function (data) {
     .data(dates)
     .enter()
     .append('div')
-    .attr('class', d => d.dummy ? 'date-dummy' : 'date')
+    .attr('class', d => d.dummy ? (d.month ? 'month' : 'date-dummy') : 'date')
     .style('background-image', d => d.dummy ? 'unset' : `linear-gradient(45deg, ${event_colors[d.events[0]]} 0%, ${event_colors[d.events[0]]} 50%, ${event_colors[d.events[1]]} 50%, ${event_colors[d.events[1]]} 100%`)
     .text(d => d.date);
 });
 
 // Legend
-var legend = d3.select("svg#legend");
-legend.append("g")
-  .attr("class", "legend-ordinal")
-  .attr("transform", "translate(20,20)");
+var legend = d3.select('svg#legend');
+legend.append('g')
+  .attr('class', 'legend-ordinal')
+  .attr('transform', 'translate(20,20)');
 
 let legend_ordinal = d3.legendColor()
-  .shape("path", d3.symbol().type(d3.symbolCircle).size(50)())
+  .shape('path', d3.symbol().type(d3.symbolCircle).size(50)())
   .shapePadding(5)
   .scale(event_color_scale);
 
-legend.select(".legend-ordinal")
+legend.select('.legend-ordinal')
   .call(legend_ordinal);

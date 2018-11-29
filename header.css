@@ -19,7 +19,7 @@
   font-weight: 800; } */
 
 .site-header {
-  padding: 10px;
+  padding: 10px 10px 0 10px;
   font-family: "Noto Sans Thai UI", "Noto Sans", sans-serif;
   background: #FFF; }
 @media only screen and (max-width: 767px) {

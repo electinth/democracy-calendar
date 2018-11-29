@@ -16,7 +16,7 @@ body {
 
 h1 {
   font-size: 18px;
-  line-height: 16px;
+  line-height: 14px;
 }
 
 h2 {
@@ -64,9 +64,10 @@ a:hover {
 
 #intro {
   width: 280px;
-  position: fixed;
-  left: 50%;
-  margin-left: -140px;
+  margin: 0 auto;
+  /* position: fixed; */
+  /* left: 50%; */
+  /* margin-left: -140px; */
   z-index: 1;
   overflow-x: visible;
   background-color: black;
@@ -103,7 +104,7 @@ a:hover {
 
 #calendar {
   width: 280px;
-  margin: 100px auto 40px auto;
+  margin: -40px auto 40px auto;
   color: white;
   background-color: black;
 }
@@ -127,8 +128,10 @@ a:hover {
 .month {
   font-size: 7pt;
   color: white;
-  display: absolute;
-  left: 0;
+  position: absolute;
+  left: 50%;
+  margin-left: -140px;
+  margin-top: -60px;
   width: 280px;
 }
 
@@ -154,8 +157,8 @@ text-align: center;
 
 .download {
   text-align: center;
+  font-family: 'Noto Sans Thai UI', 'Noto Sans', sans-serif;
 }
-
 
 /* GENERAL MEDIA QUERIES */
 
