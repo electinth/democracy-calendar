@@ -12,25 +12,25 @@ const first_day_of_year = 2;
 for (let day = 0; day < first_day_of_year; day++) {
   calendar.append('div').attr('class', 'date-dummy');
 }
+const popup = d3.select('#popup');
 
 d3.csv('events.csv', function (data) {
   let events_by_date = {};
   data
     .filter(d => d.color)
     .forEach(d => {
+      let [current_date, current_month] = d.date_month.split('-');
+      let event = {
+        text: d.event,
+        color: event_colors[+d.color],
+        date_year: `${current_date} ${current_month} ${+d.year}`
+      };
       if (events_by_date[d.date_month]) {
-        events_by_date[d.date_month].texts.push(d.event);
-        events_by_date[d.date_month].colors.push(+d.color);
-        events_by_date[d.date_month].years.push(+d.year);
+        events_by_date[d.date_month].push(event);
       } else {
-        events_by_date[d.date_month] = {
-          texts: [d.event],
-          colors: [+d.color],
-          years: [+d.year]
-        }
+        events_by_date[d.date_month] = [event];
       }
     });
-  console.log(events_by_date);
 
   for (let day = 0; day < 365; day++) {
     let new_date = new Date(date.getTime() + (day * 24 * 60 * 60 * 1000));
@@ -52,11 +52,9 @@ d3.csv('events.csv', function (data) {
       });
     }
 
-    let event = events_by_date[current_date + '-' + current_month.substring(0, 3)];
     dates.push({
       date: current_date,
-      colors: event ? event.colors.map(c => event_colors[c]) : ['#4A4A4A'], //neutral color unless there's an event
-      texts: [],
+      events: events_by_date[current_date + '-' + current_month.substring(0, 3)],
       dummy: false
     });
   }
@@ -65,17 +63,43 @@ d3.csv('events.csv', function (data) {
     .data(dates)
     .enter()
     .append('div')
-    .attr('class', d => d.dummy ? (d.month ? 'month' : 'date-dummy') : 'date')
+    .text(d => d.date)
+    .attr('class', d => (d.dummy ? (d.month ? 'month' : 'date-dummy') : 'date') + ((d.events && d.events.length > 0) ? ' clickable' : ''))
     .style('background-image', d => {
       if (d.dummy) {
         return 'unset';
       } else {
-        let color0 = d.colors[0];
-        let color1 = d.colors[(d.colors.length > 1) ? 1 : 0];
-        return `linear-gradient(45deg, ${color0} 0%, ${color0} 50%, ${color1} 50%, ${color1} 100%`;
+        //TODO only unique colors and sorted
+        if (d.events && d.events.length >= 2) {
+          let color0 = d.events[0].color;
+          let color1 = d.events[1].color;
+          return `linear-gradient(45deg, ${color0} 0%, ${color0} 50%, ${color1} 50%, ${color1} 100%`;
+        } else {
+          let color0 = (d.events && d.events.length > 0) ? d.events[0].color : '#4A4A4A';
+          return `linear-gradient(45deg, ${color0} 0%, ${color0} 100%`;
+        }
       }
     })
-    .text(d => d.date);
+    .on('click', d => {
+      if (d.events && d.events.length > 0) { //special date with events
+        popup.classed('shown', true);
+        popup.selectAll('.event')
+          .data(d.events)
+          .enter()
+          .append('div')
+          .attr('class', 'event')
+          .style('background-color', d => d.color)
+          .style('color', d => (d.color === '#E1E1E2') ? 'black' : 'white')
+          .html(d => `<h2>${d.date_year}</h2><h3>${d.text}</h3>`)
+      }
+    });
+
+  popup.on('click', () => {
+    if (popup.classed('shown')) { //popup already shown (to toggle out)
+      popup.classed('shown', false);
+      popup.selectAll('*').remove();
+    }
+  });
 });
 
 // Legend
