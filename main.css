@@ -163,6 +163,7 @@ text-align: center;
   height: 100%;
   top: 0;
   left: 0;
+  text-align: center;
   opacity: 0;
   pointer-events: none;
 }
@@ -170,48 +171,28 @@ text-align: center;
   opacity: 1;
   pointer-events: auto;
 }
-.event {
+#popup:before {
+  content: '';
+  width: 0;
+  display: inline-block;
+  height: 100%;
+  vertical-align: middle;
+}
+.events {
   width: 240px;
   margin: 0 auto;
+  display: inline-block;
+  vertical-align: middle;
+}
+.event {
+  width: 100%;
   padding: 20px;
   font-family: 'Noto Sans Thai UI', 'Noto Sans', sans-serif;
   text-align: center;
 }
 
-/* GENERAL MEDIA QUERIES */
-
-/* @media only screen and (max-width: 900px) {
-.title, .text, .status {
-  width: 100%;
+@media only screen and (min-width: 900px) {
+  #popup:before {
+    width: 600px;
+  }
 }
-.image-wrapper {
-  width: 100%;
-  position: unset;
-}
-}
-@media only screen and (max-width: 600px) {
-.fixed {
-  text-align: left;
-}
-.bottom {
-  text-align: left;
-}
-
-.intro .container {
-  text-align: right;
-  padding-right: 40px;
-}
-
-.timeline ul::before, .timeline ul::after {
-  left: 20px;
-}
-.timeline ul li {
-  margin-left: 50px;
-}
-.timeline ul li::before, .timeline ul li.last::before {
-  content: '';
-}
-.timeline ul li > div {
-  width: calc(100vw - 120px);
-}
-} */

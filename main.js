@@ -81,9 +81,9 @@ d3.csv('events.csv', function (data) {
       }
     })
     .on('click', d => {
-      if (d.events && d.events.length > 0) { //special date with events
+      if (d.events && d.events.length > 0) { // special date with events
         popup.classed('shown', true);
-        popup.selectAll('.event')
+        popup.select('.events').selectAll('.event')
           .data(d.events)
           .enter()
           .append('div')
@@ -95,11 +95,12 @@ d3.csv('events.csv', function (data) {
     });
 
   popup.on('click', () => {
-    if (popup.classed('shown')) { //popup already shown (to toggle out)
+    if (popup.classed('shown')) { // popup already shown (to toggle out)
       popup.classed('shown', false);
-      popup.selectAll('*').remove();
+      popup.select('.events').selectAll('*').remove();
     }
   });
+  popup.select('.events').on('click', () => d3.event.stopPropagation());
 });
 
 // Legend
