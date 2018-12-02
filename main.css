@@ -191,8 +191,11 @@ text-align: center;
   text-align: center;
 }
 
-@media only screen and (min-width: 900px) {
+@media only screen and (min-width: 950px) {
+  #intro, #calendar {
+    zoom: 1.2;
+  }
   #popup:before {
-    width: 600px;
+    width: 650px;
   }
 }
