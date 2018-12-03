@@ -83,6 +83,7 @@ d3.csv('events.csv', function (data) {
     .on('click', d => {
       if (d.events && d.events.length > 0) { // special date with events
         popup.classed('shown', true);
+        popup.select('.events').selectAll('*').remove();
         popup.select('.events').selectAll('.event')
           .data(d.events)
           .enter()
@@ -97,7 +98,6 @@ d3.csv('events.csv', function (data) {
   popup.on('click', () => {
     if (popup.classed('shown')) { // popup already shown (to toggle out)
       popup.classed('shown', false);
-      popup.select('.events').selectAll('*').remove();
     }
   });
   popup.select('.events').on('click', () => d3.event.stopPropagation());
@@ -111,7 +111,8 @@ legend.append('g')
 
 let legend_ordinal = d3.legendColor()
   .shape('path', d3.symbol().type(d3.symbolCircle).size(50)())
-  .shapePadding(5)
+  .shapePadding(52)
+  .orient('horizontal')
   .scale(event_color_scale);
 
 legend.select('.legend-ordinal')

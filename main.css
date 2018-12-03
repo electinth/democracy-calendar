@@ -62,24 +62,34 @@ a:hover {
   /* position: fixed; */
   /* left: 50%; */
   /* margin-left: -140px; */
-  z-index: 1;
-  overflow-x: visible;
-  background-color: black;
+  /* z-index: 1; */
+  /* overflow-x: visible; */
+  /* background-color: black; */
 }
 
+#language {
+  text-align: right;
+  padding-top: 1em;
+  font-family: 'Noto Sans Thai UI', 'Noto Sans', sans-serif;
+  font-size: 7pt;
+}
 #title {
-  width: 180px;
-  display: inline-block;
-  vertical-align: bottom;
+  width: 280px;
+  display: block;
+  /* vertical-align: bottom; */
+  text-align: center;
+  padding-top: 1em;
 }
 #legend {
-  width: 95px;
-  height: 100px;
-  display: inline-block;
-  vertical-align: bottom;
+  width: 280px;
+  height: 50px;
+  display: block;
+  /* vertical-align: bottom; */
   font-family: 'Noto Sans Thai UI', 'Noto Sans', sans-serif;
   font-size: 7pt;
   fill: white;
+  margin-top: -1em;
+  overflow: visible;
 }
 #days-of-week {
   margin-top: 10px;
