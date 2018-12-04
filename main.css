@@ -46,15 +46,18 @@ h3 {
 a:link,
 a:visited,
 a:active {
-  color: white;
-  /* color: #F0324B; */
+  color: #F0324B;
   text-decoration: none;
 }
-
 a:hover {
-  color: white;
-  /* color: #F0324B; */
+  color: #F0324B;
   text-decoration: underline;
+}
+#language a:link,
+#language a:visited,
+#language a:active,
+#language a:hover {
+  color: white;
 }
 
 .site-header {
@@ -65,11 +68,11 @@ a:hover {
 }
 #intro {
   width: 100%;
-  margin: 0 auto;
+  margin: 90px auto 0;
+  padding-top: 20px;
   position: fixed;
   /* left: 50%; */
   /* margin-left: -140px; */
-  margin-top: 80px;
   z-index: 1;
   overflow-x: visible;
   background-color: black;
@@ -118,7 +121,7 @@ a:hover {
 #calendar {
   width: 280px;
   margin: 0 auto;
-  padding: 200px 0 0 0;
+  padding-top: 230px;
   color: white;
   background-color: black;
 }
@@ -215,6 +218,12 @@ text-align: center;
 @media only screen and (min-width: 950px) {
   #intro, #calendar {
     zoom: 1.2;
+  }
+  #intro {
+    margin-top: 70px;
+  }
+  #calendar {
+    padding-top: 210px;
   }
   #popup:before {
     width: 650px;
