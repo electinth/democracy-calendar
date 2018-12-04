@@ -1,7 +1,8 @@
 const event_colors = ['#005FFF', '#EB1937', '#F5A623', '#29A448', '#E1E1E2'];
-const event_color_scale = d3.scaleOrdinal()
-  .domain(['เลือกตั้ง ส.ส.', 'รัฐประหาร', 'ปฏิวัติ / กบฏ', 'ชุมนุม / ประท้วง', 'อื่น ๆ'])
-  .range(event_colors);
+const event_color_scale = {
+  th: d3.scaleOrdinal().domain(['เลือกตั้ง ส.ส.', 'รัฐประหาร', 'ปฏิวัติ / กบฏ', 'ชุมนุม / ประท้วง', 'อื่น ๆ']).range(event_colors),
+  en: d3.scaleOrdinal().domain(['Election', 'Coup d\'état', 'Rebellion', 'Demonstration', 'etc.']).range(event_colors)
+};
 
 let date = new Date('Janurary 1, 2019');
 let dates = [];
@@ -14,6 +15,8 @@ for (let day = 0; day < first_day_of_year; day++) {
 }
 const popup = d3.select('#popup');
 
+let language = 'th'; //TODO from URL
+
 d3.csv('events.csv', function (data) {
   let events_by_date = {};
   data
@@ -21,9 +24,12 @@ d3.csv('events.csv', function (data) {
     .forEach(d => {
       let [current_date, current_month] = d.date_month.split('-');
       let event = {
-        text: d.event,
+        text: {
+          th: d.event,
+          en: d.event_en
+        },
         color: event_colors[+d.color],
-        date_year: `${current_date} ${current_month} ${+d.year}`
+        date_year: `${current_date} ${current_month} ${+d.year - 543}`
       };
       if (events_by_date[d.date_month]) {
         events_by_date[d.date_month].push(event);
@@ -91,7 +97,7 @@ d3.csv('events.csv', function (data) {
           .attr('class', 'event')
           .style('background-color', d => d.color)
           .style('color', d => (d.color === '#E1E1E2') ? 'black' : 'white')
-          .html(d => `<h2>${d.date_year}</h2><h3>${d.text}</h3>`)
+          .html(d => `<h2>${d.date_year}</h2><h3>${d.text[language]}</h3>`)
       }
     });
 
@@ -112,8 +118,39 @@ legend.append('g')
 let legend_ordinal = d3.legendColor()
   .shape('path', d3.symbol().type(d3.symbolCircle).size(50)())
   .shapePadding(52)
-  .orient('horizontal')
-  .scale(event_color_scale);
+  .orient('horizontal');
 
-legend.select('.legend-ordinal')
-  .call(legend_ordinal);
+change_languge(language);
+
+function change_languge(lang) {
+  language = lang;
+
+  // change intro words
+  popup.classed('shown', true);
+  popup.select('.events').selectAll('*').remove();
+  popup.select('.events').append('div')
+    .attr('class', 'event')
+    .style('background-color', '#EB1937')
+    .style('color', 'white')
+    .html(() => {
+      switch (language) {
+        case 'en': return '<h2>On this Day in Thailand\'s Democracy History</h2><h3>Thailand\'s Democracy Calendar<br>Click dates for details<br>or find download links below.</h3>';
+        case 'th': default: return '<h2>วันนี้… มีอะไรเกิดขึ้นกับประชาธิปไตยไทยบ้าง</h2><h3>แจกปฏิทินประชาธิปไตยไทย<br>กดดูรายละเอียดตามวัน<br>หรือดาว์นโหลดไปใช้กันก็ได้</h3>';
+      }
+    });
+
+  // change the legend
+  legend_ordinal.scale(event_color_scale[language]);
+  legend.select('.legend-ordinal')
+    .call(legend_ordinal);
+
+  // change download text
+  d3.select(".download > .text").html(() => {
+    switch (language) {
+      case 'en': return 'Download <a target="_blank" href="images/month-all.png">2019 Democracy Calendar</a> or select monthly:';
+      case 'th': default: return 'ดาวน์โหลดปฏิทินนี้<a target="_blank" href="images/month-all.png">ทั้งปี</a> หรือตามเดือน:';
+    }
+  });
+
+  return true;
+}
