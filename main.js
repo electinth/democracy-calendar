@@ -4,7 +4,7 @@ const event_color_scale = {
   en: d3.scaleOrdinal().domain(['Election', 'Coup d\'état', 'Rebellion', 'Demonstration', 'etc.']).range(event_colors)
 };
 
-let date = new Date('Janurary 1, 2019');
+let date = new Date('January 1, 2019');
 let dates = [];
 const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
 
