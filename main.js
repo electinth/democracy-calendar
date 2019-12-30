@@ -1,15 +1,19 @@
+// To change for later years
+const year = 2020;
+const day_nums = 366; //or 365
+const first_day_of_year = 3; //Wednesday
+
 const event_colors = ['#005FFF', '#EB1937', '#F5A623', '#29A448', '#E1E1E2'];
 const event_color_scale = {
   th: d3.scaleOrdinal().domain(['เลือกตั้ง ส.ส.', 'รัฐประหาร', 'ปฏิวัติ / กบฏ', 'ชุมนุม / ประท้วง', 'อื่น ๆ']).range(event_colors),
   en: d3.scaleOrdinal().domain(['Election', 'Coup d\'état', 'Rebellion', 'Demonstration', 'etc.']).range(event_colors)
 };
 
-let date = new Date('January 1, 2019');
+let date = new Date('January 1, ' + year);
 let dates = [];
 const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
 
 const calendar = d3.select('#calendar');
-const first_day_of_year = 2;
 for (let day = 0; day < first_day_of_year; day++) {
   calendar.append('div').attr('class', 'date-dummy');
 }
@@ -38,7 +42,7 @@ d3.csv('events.csv', function (data) {
       }
     });
 
-  for (let day = 0; day < 365; day++) {
+  for (let day = 0; day < day_nums; day++) {
     let new_date = new Date(date.getTime() + (day * 24 * 60 * 60 * 1000));
     let current_date = new_date.getDate();
     let current_month = months[new_date.getMonth()];
@@ -144,13 +148,13 @@ function change_languge(lang) {
   legend.select('.legend-ordinal')
     .call(legend_ordinal);
 
-  // change download text
-  d3.select(".download > .text").html(() => {
-    switch (language) {
-      case 'en': return 'Download <a target="_blank" href="images/month-all.png">2019 Democracy Calendar</a> or select monthly:';
-      case 'th': default: return 'ดาวน์โหลดปฏิทินนี้<a target="_blank" href="images/month-all.png">ทั้งปี</a> หรือตามเดือน:';
-    }
-  });
+  // // change download text
+  // d3.select(".download > .text").html(() => {
+  //   switch (language) {
+  //     case 'en': return 'Download <a target="_blank" href="images/month-all.png">2019 Democracy Calendar</a> or select monthly:';
+  //     case 'th': default: return 'ดาวน์โหลดปฏิทินนี้<a target="_blank" href="images/month-all.png">ทั้งปี</a> หรือตามเดือน:';
+  //   }
+  // });
 
   return true;
 }
