@@ -139,7 +139,7 @@ function change_languge(lang) {
     .html(() => {
       switch (language) {
         case 'en': return '<h2>On this Day in Thailand\'s Democracy History</h2><h3>Thailand\'s Democracy Calendar<br>Click dates for details<br>or find download links below.</h3>';
-        case 'th': default: return '<h2>วันนี้… มีอะไรเกิดขึ้นกับประชาธิปไตยไทยบ้าง</h2><h3>แจกปฏิทินประชาธิปไตยไทย<br>กดดูรายละเอียดตามวัน<br>หรือดาวน์โหลดไปใช้กันก็ได้</h3>';
+        case 'th': default: return '<h2>วันนี้… มีอะไรเกิดขึ้นกับประชาธิปไตยไทยบ้าง</h2><h3>แจกปฏิทินประชาธิปไตยไทย<br>กดดูรายละเอียดตามวันได้</h3>'; //<br>หรือดาวน์โหลดไปใช้กันก็ได้</h3>';
       }
     });
 
