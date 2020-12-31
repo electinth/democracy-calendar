@@ -1,7 +1,7 @@
 // To change for later years
-const year = 2020;
-const day_nums = 366; //or 365
-const first_day_of_year = 3; //Wednesday
+const year = 2021;
+const day_nums = 365; // 365 0r 366
+const first_day_of_year = 5; // 0 for Sunday and so on
 
 const event_colors = ['#005FFF', '#EB1937', '#F5A623', '#29A448', '#E1E1E2'];
 const event_color_scale = {
